@@ -101,6 +101,11 @@
     width: 50%;
     margin: auto;
     margin-top: 4rem;
+    border-radius: 30px;
+    box-shadow:
+      inset -10px 0 10px -10px rgb(230, 227, 227, 0.8),
+      inset 10px 0 10px -10px rgb(230, 227, 227, 0.8);
+    // box-shadow: inset 0 0 10px rgb(230, 227, 227, 0.5); //(CHECK THIS TOO)
 
     @media screen and (max-width: 500px) {
       width: 100%;
@@ -130,7 +135,6 @@
       }
     }
   }
-
   .landing_signup {
     border-radius: 50px;
     padding: 0.7rem 1.5rem;
