@@ -4,14 +4,22 @@ import { useSelector } from "react-redux";
 import useSWR from "swr";
 import { EventsCard } from "../../../components/private";
 import CreateEvents from "../../../components/private/events/create/CreateEvents";
-import { Button, Footer, Navbar } from "../../../components/shared";
+import {
+  Button,
+  Footer,
+  Navbar,
+  SkeletonCard,
+} from "../../../components/shared";
 import { eventEndpoints } from "../../../static/ApiEndpoints";
 import ComponentHelmet from "../../../utils/ComponentHelmet";
 import fetcher from "../../../utils/Fetcher";
 import "./Events.scss";
 
 const Events = () => {
-  const { data: events } = useSWR(eventEndpoints.all, fetcher);
+  const { data: events, isLoading: loading } = useSWR(
+    eventEndpoints.all,
+    fetcher,
+  );
   const [showCreateModal, setshowCreateModal] = useState(false);
   const userType = useSelector((state) => state.user.userType);
 
@@ -49,9 +57,22 @@ const Events = () => {
             )}
           </div>
           <div className="events_div">
-            {events?.map((event, id) => (
-              <EventsCard event={event} key={id} />
-            ))}
+            {/* <SkeletonCard/> */}
+            {loading ? (
+              <div
+                style={{
+                  display: "flex",
+                  width: "100%",
+                  justifyContent: "space-evenly",
+                }}
+              >
+                {" "}
+                <SkeletonCard /> <SkeletonCard /> <SkeletonCard />{" "}
+                <SkeletonCard />{" "}
+              </div>
+            ) : (
+              events?.map((event, id) => <EventsCard event={event} key={id} />)
+            )}
           </div>
         </div>
       </main>
